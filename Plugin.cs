@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
 using SilksongUtils.Patches;
@@ -10,6 +11,7 @@ namespace SilksongUtils
     public class Plugin : BaseUnityPlugin
     {
         internal static new ManualLogSource Logger;
+        internal static ConfigEntry<int> configDeathCount;
 
         private Harmony harmony;
         private GameObject ui;
@@ -19,11 +21,15 @@ namespace SilksongUtils
             // Plugin startup logic
             Logger = base.Logger;
 
+            // Register config
+            configDeathCount = Config.Bind("General", "DeathCount", 0, "Death count");
+
             // Register patches
             harmony = new Harmony(MyPluginInfo.PLUGIN_GUID);
             harmony.PatchAll(typeof(ShellShard_AutoCollect));
             harmony.PatchAll(typeof(HealthManager_ESP));
             harmony.PatchAll(typeof(HeroController_TakeNoDamage));
+            harmony.PatchAll(typeof(HeroController_DeathCount));
 
             // Create UI object
             ui = new GameObject();

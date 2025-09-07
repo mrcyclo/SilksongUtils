@@ -1,7 +1,5 @@
 ﻿using GlobalEnums;
-using HarmonyLib;
 using UnityEngine;
-using static HutongGames.PlayMaker.Actions.Vector2RandomValue;
 
 namespace SilksongUtils
 {
@@ -12,13 +10,15 @@ namespace SilksongUtils
         public bool AutoCollect { get; private set; } = false;
         public bool TakeNoDamage { get; private set; } = false;
         public bool DrawHpBar { get; private set; } = false;
+        public bool DrawDeathCount { get; private set; } = false;
 
         private const int WIDTH = 220;
         private const int HEIGHT = 150;
         private const int PADDING = 10;
 
-        private bool showGui = true;
+        private bool drawOptionsGui = true;
         private GameManager gameManager = null;
+        private GUIStyle deathCountStyle = null;
 
         private void Awake()
         {
@@ -27,7 +27,7 @@ namespace SilksongUtils
 
         private void Update()
         {
-            showGui = false;
+            drawOptionsGui = false;
 
             if (gameManager == null) gameManager = Object.FindAnyObjectByType<GameManager>();
             if (gameManager == null) return;
@@ -35,13 +35,25 @@ namespace SilksongUtils
             if (gameManager.ui == null) return;
             if (gameManager.ui.uiState != UIState.PAUSED) return;
 
-            showGui = true;
+            drawOptionsGui = true;
         }
 
         private void OnGUI()
         {
-            if (!showGui) return;
+            if (drawOptionsGui)
+            {
+                DrawOptionsGUI();
+            }
 
+            if (DrawDeathCount)
+            {
+                deathCountStyle ??= new GUIStyle(GUI.skin.label) { fontSize = 20 };
+                GUI.Label(new Rect(20, Screen.height - 40, 200, 20), $"Death Count: {Plugin.configDeathCount.Value}", deathCountStyle);
+            }
+        }
+
+        private void DrawOptionsGUI()
+        {
             int startX = 50; // Screen.width / 2 - WIDTH / 2;
             int startY = 50; // Screen.height / 2 - HEIGHT / 2;
 
@@ -62,6 +74,9 @@ namespace SilksongUtils
             startY += 30;
 
             DrawHpBar = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), DrawHpBar, " Draw HP bar");
+            startY += 30;
+
+            DrawDeathCount = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), DrawDeathCount, " Draw Death Count");
             startY += 30;
         }
     }
