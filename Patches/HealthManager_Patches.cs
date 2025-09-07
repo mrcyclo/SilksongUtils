@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SilksongUtils.Patches
 {
-    internal class HealthManager_ESP
+    internal class HealthManager_Patches
     {
         [HarmonyPatch(typeof(HealthManager), "Awake")]
         [HarmonyPostfix]

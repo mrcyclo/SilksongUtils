@@ -27,9 +27,8 @@ namespace SilksongUtils
             // Register patches
             harmony = new Harmony(MyPluginInfo.PLUGIN_GUID);
             harmony.PatchAll(typeof(ShellShard_AutoCollect));
-            harmony.PatchAll(typeof(HealthManager_ESP));
-            harmony.PatchAll(typeof(HeroController_TakeNoDamage));
-            harmony.PatchAll(typeof(HeroController_DeathCount));
+            harmony.PatchAll(typeof(HealthManager_Patches));
+            harmony.PatchAll(typeof(HeroController_Patches));
 
             // Create UI object
             ui = new GameObject();

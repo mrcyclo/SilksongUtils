@@ -11,6 +11,7 @@ namespace SilksongUtils
         public bool TakeNoDamage { get; private set; } = false;
         public bool DrawHpBar { get; private set; } = false;
         public bool DrawDeathCount { get; private set; } = false;
+        public bool InfiniteSilk { get; private set; } = false;
 
         private const int WIDTH = 220;
         private const int HEIGHT = 150;
@@ -77,6 +78,9 @@ namespace SilksongUtils
             startY += 30;
 
             DrawDeathCount = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), DrawDeathCount, " Draw Death Count");
+            startY += 30;
+
+            InfiniteSilk = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), InfiniteSilk, " Infinite Silk");
             startY += 30;
         }
     }
