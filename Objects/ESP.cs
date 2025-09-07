@@ -41,7 +41,7 @@ namespace SilksongUtils.Objects
             }
 
             // Lấy vị trí đối tượng ở thế giới sang toạ độ màn hình
-            Vector3 worldPos = gameObject.transform.position + Vector3.up * 2.0f; // Nâng lên trên đầu đối tượng
+            Vector3 worldPos = GetObjectTopPosition(); // Nâng lên trên đầu đối tượng
             Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
 
             // Kiểm tra đối tượng nằm trước camera
@@ -74,6 +74,30 @@ namespace SilksongUtils.Objects
                 // Reset màu
                 GUI.color = oldColor;
             }
+        }
+
+        private Vector3 GetObjectTopPosition()
+        {
+            // Thử lấy bounds từ Renderer trước
+            Renderer renderer = GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                Bounds bounds = renderer.bounds;
+                // Lấy điểm chính giữa trên đỉnh: X và Z giữa, Y là max
+                return new Vector3(bounds.center.x, bounds.max.y, bounds.center.z);
+            }
+
+            // Nếu không có Renderer, thử Collider
+            Collider collider = GetComponent<Collider>();
+            if (collider != null)
+            {
+                Bounds bounds = collider.bounds;
+                // Lấy điểm chính giữa trên đỉnh: X và Z giữa, Y là max
+                return new Vector3(bounds.center.x, bounds.max.y, bounds.center.z);
+            }
+
+            // Fallback: sử dụng transform position + offset nhỏ
+            return gameObject.transform.position + Vector3.up * 2.0f;
         }
     }
 }
