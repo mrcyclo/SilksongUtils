@@ -28,7 +28,7 @@ namespace SilksongUtils.Patches
             {
                 if (__instance.playerData.silk < __instance.playerData.silkMax)
                 {
-                    __instance.RefillSilkToMaxSilent();
+                    __instance.playerData.silk = __instance.playerData.silkMax;
                 }
             }
         }
