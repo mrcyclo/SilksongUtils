@@ -26,9 +26,9 @@ namespace SilksongUtils.Patches
 
             if (IMGUI.instance.InfiniteSilk)
             {
-                if (__instance.playerData.silk < __instance.playerData.silkMax)
+                if (__instance.playerData.silk < __instance.playerData.CurrentSilkMax)
                 {
-                    __instance.playerData.silk = __instance.playerData.silkMax;
+                    __instance.playerData.silk = __instance.playerData.CurrentSilkMax;
                 }
             }
         }
