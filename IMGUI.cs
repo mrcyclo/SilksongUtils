@@ -48,7 +48,7 @@ namespace SilksongUtils
             if (DrawDeathCount)
             {
                 deathCountStyle ??= new GUIStyle(GUI.skin.label) { fontSize = 20 };
-                GUI.Label(new Rect(20, Screen.height - 40, 200, 20), $"Death Count: {Plugin.configDeathCount.Value}", deathCountStyle);
+                GUI.Label(new Rect(20, Screen.height - 40, 200, 40), $"Death Count: {Plugin.configDeathCount.Value}", deathCountStyle);
             }
         }
 
