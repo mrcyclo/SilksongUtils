@@ -8,7 +8,7 @@ namespace SilksongUtils.Patches
         [HarmonyPrefix]
         private static void Update_Prefix(HeroController __instance)
         {
-            if (IMGUI.instance.TakeNoDamage)
+            if (Plugin.configTakeNoDamage.Value)
             {
                 __instance.SetTakeNoDamage();
             }

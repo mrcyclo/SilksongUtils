@@ -8,7 +8,7 @@ namespace SilksongUtils.Patches
         [HarmonyPrefix]
         private static void BouncePod_Hit_Prefix(BouncePod __instance, ref HitInstance damageInstance)
         {
-            if (!IMGUI.instance.AttackToBounce) return;
+            if (!Plugin.configAttackToBounce.Value) return;
             if (damageInstance.AttackType != AttackTypes.Nail) return;
 
             var hitDirection = damageInstance.GetHitDirection(HitInstance.TargetType.BouncePod);

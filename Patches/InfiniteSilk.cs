@@ -8,7 +8,7 @@ namespace SilksongUtils.Patches
         [HarmonyPrefix]
         private static void Update_Prefix(HeroController __instance)
         {
-            if (!IMGUI.instance.InfiniteSilk) return;
+            if (!Plugin.configInfiniteSilk.Value) return;
             if (__instance.playerData.silk >= __instance.playerData.CurrentSilkMax) return;
             __instance.playerData.silk = __instance.playerData.CurrentSilkMax;
         }

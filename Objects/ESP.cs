@@ -26,7 +26,7 @@ namespace SilksongUtils.Objects
             if (gameObject.transform == null) return;
             if (Camera.main == null) return;
             if (healthManager.isDead) return;
-            if (!IMGUI.instance.DrawHpBar) return;
+            if (!Plugin.configDrawHpBar.Value) return;
 
             if (textFieldNoBorder == null)
             {

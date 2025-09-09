@@ -2,7 +2,6 @@
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
-using SilksongUtils.Patches;
 using UnityEngine;
 
 namespace SilksongUtils
@@ -11,7 +10,14 @@ namespace SilksongUtils
     public class Plugin : BaseUnityPlugin
     {
         internal static new ManualLogSource Logger;
+        internal static ConfigEntry<bool> configAutoCollect;
+        internal static ConfigEntry<bool> configTakeNoDamage;
+        internal static ConfigEntry<bool> configDrawHpBar;
+        internal static ConfigEntry<bool> configDrawDeathCount;
         internal static ConfigEntry<int> configDeathCount;
+        internal static ConfigEntry<bool> configInfiniteSilk;
+        internal static ConfigEntry<bool> configFastAttack;
+        internal static ConfigEntry<bool> configAttackToBounce;
 
         private Harmony harmony;
         private GameObject ui;
@@ -22,7 +28,14 @@ namespace SilksongUtils
             Logger = base.Logger;
 
             // Register config
+            configAutoCollect = Config.Bind("General", "AutoCollect", false, "Auto collect");
+            configTakeNoDamage = Config.Bind("General", "TakeNoDamage", false, "Take no damage");
+            configDrawHpBar = Config.Bind("General", "DrawHpBar", false, "Draw HP bar");
+            configDrawDeathCount = Config.Bind("General", "DrawDeathCount", false, "Draw Death Count");
             configDeathCount = Config.Bind("General", "DeathCount", 0, "Death count");
+            configInfiniteSilk = Config.Bind("General", "InfiniteSilk", false, "Infinite Silk");
+            configFastAttack = Config.Bind("General", "FastAttack", false, "Fast Attack");
+            configAttackToBounce = Config.Bind("General", "AttackToBounce", false, "Attack to Bounce");
 
             // Register patches
             harmony = new Harmony(MyPluginInfo.PLUGIN_GUID);

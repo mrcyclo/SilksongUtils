@@ -2,7 +2,7 @@
 
 namespace SilksongUtils.Patches
 {
-    internal class HoldToQuickAttack
+    internal class FastAttack
     {
         private static bool cStateAttacking = false;
 
@@ -10,7 +10,7 @@ namespace SilksongUtils.Patches
         [HarmonyPrefix]
         private static void HeroController_CanAttackAction_Prefix(HeroController __instance)
         {
-            if (!IMGUI.instance.FastAttack) return;
+            if (!Plugin.configFastAttack.Value) return;
 
             cStateAttacking = __instance.cState.attacking;
             __instance.cState.attacking = false;
@@ -20,7 +20,7 @@ namespace SilksongUtils.Patches
         [HarmonyPostfix]
         private static void HeroController_CanAttackAction_Postfix(HeroController __instance)
         {
-            if (!IMGUI.instance.FastAttack) return;
+            if (!Plugin.configFastAttack.Value) return;
 
             __instance.cState.attacking = cStateAttacking;
         }
@@ -29,7 +29,7 @@ namespace SilksongUtils.Patches
         [HarmonyPostfix]
         private static void HeroController_DoAttack_Postfix(HeroController __instance)
         {
-            if (!IMGUI.instance.FastAttack) return;
+            if (!Plugin.configFastAttack.Value) return;
 
             AccessTools.Field(__instance.GetType(), "attack_cooldown").SetValue(__instance, 0f);
         }

@@ -8,7 +8,7 @@ namespace SilksongUtils.Patches
         [HarmonyPostfix]
         private static void Postfix(CurrencyObjectBase __instance)
         {
-            if (!IMGUI.instance.AutoCollect) return;
+            if (!Plugin.configAutoCollect.Value) return;
             AccessTools.Field(typeof(CurrencyObjectBase), "isAttracted").SetValue(__instance, true);
         }
     }

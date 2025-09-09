@@ -7,14 +7,6 @@ namespace SilksongUtils
     {
         public static IMGUI instance;
 
-        public bool AutoCollect { get; private set; } = false;
-        public bool TakeNoDamage { get; private set; } = false;
-        public bool DrawHpBar { get; private set; } = false;
-        public bool DrawDeathCount { get; private set; } = false;
-        public bool InfiniteSilk { get; private set; } = false;
-        public bool FastAttack { get; private set; } = false;
-        public bool AttackToBounce { get; private set; } = false;
-
         private const int WIDTH = 220;
         private const int HEIGHT = 150;
         private const int PADDING = 10;
@@ -48,7 +40,7 @@ namespace SilksongUtils
                 DrawOptionsGUI();
             }
 
-            if (DrawDeathCount)
+            if (Plugin.configDrawDeathCount.Value)
             {
                 deathCountStyle ??= new GUIStyle(GUI.skin.label) { fontSize = 20 };
                 GUI.Label(new Rect(20, Screen.height - 40, 200, 40), $"Death Count: {Plugin.configDeathCount.Value}", deathCountStyle);
@@ -63,25 +55,25 @@ namespace SilksongUtils
             GUI.Box(new Rect(startX, startY, WIDTH, HEIGHT), "Silksong Utilities");
             startY += 30;
 
-            AutoCollect = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), AutoCollect, " Auto Collect");
+            Plugin.configAutoCollect.Value = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), Plugin.configAutoCollect.Value, " Auto Collect");
             startY += 30;
 
-            TakeNoDamage = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), TakeNoDamage, " Take No Damage");
+            Plugin.configTakeNoDamage.Value = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), Plugin.configTakeNoDamage.Value, " Take No Damage");
             startY += 30;
 
-            DrawHpBar = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), DrawHpBar, " Draw HP bar");
+            Plugin.configDrawHpBar.Value = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), Plugin.configDrawHpBar.Value, " Draw HP bar");
             startY += 30;
 
-            DrawDeathCount = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), DrawDeathCount, " Draw Death Count");
+            Plugin.configDrawDeathCount.Value = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), Plugin.configDrawDeathCount.Value, " Draw Death Count");
             startY += 30;
 
-            InfiniteSilk = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), InfiniteSilk, " Infinite Silk");
+            Plugin.configInfiniteSilk.Value = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), Plugin.configInfiniteSilk.Value, " Infinite Silk");
             startY += 30;
 
-            FastAttack = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), FastAttack, " Fast Attack");
+            Plugin.configFastAttack.Value = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), Plugin.configFastAttack.Value, " Fast Attack");
             startY += 30;
 
-            AttackToBounce = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), AttackToBounce, " Attack to Bounce");
+            Plugin.configAttackToBounce.Value = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), Plugin.configAttackToBounce.Value, " Attack to Bounce");
             startY += 30;
 
             var saveGame = GUI.Button(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), "Force Save Game");
