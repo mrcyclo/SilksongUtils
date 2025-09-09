@@ -13,6 +13,7 @@ namespace SilksongUtils
         public bool DrawDeathCount { get; private set; } = false;
         public bool InfiniteSilk { get; private set; } = false;
         public bool FastAttack { get; private set; } = false;
+        public bool AttackToBounce { get; private set; } = false;
 
         private const int WIDTH = 220;
         private const int HEIGHT = 150;
@@ -78,6 +79,9 @@ namespace SilksongUtils
             startY += 30;
 
             FastAttack = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), FastAttack, " Fast Attack");
+            startY += 30;
+
+            AttackToBounce = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), AttackToBounce, " Attack to Bounce");
             startY += 30;
 
             var saveGame = GUI.Button(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), "Force Save Game");
