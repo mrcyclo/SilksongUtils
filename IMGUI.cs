@@ -76,6 +76,9 @@ namespace SilksongUtils
             Plugin.configAttackToBounce.Value = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), Plugin.configAttackToBounce.Value, " Attack to Bounce");
             startY += 30;
 
+            Plugin.configAutoParry.Value = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), Plugin.configAutoParry.Value, " Auto Parry");
+            startY += 30;
+
             var saveGame = GUI.Button(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), "Force Save Game");
             if (saveGame)
             {

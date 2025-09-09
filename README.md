@@ -4,14 +4,15 @@ A BepInEx plugin that provides utilities and cheat features for Hollow Knight: S
 
 ## Features
 
-- **Auto Collect**: Automatically collect currency items (Geo) when they land on the ground
-- **Take No Damage**: Enable invincibility mode, preventing the player from taking damage from enemies
-- **Draw HP Bar**: Display enemy health bars on screen to track their current health status
-- **Draw Death Count**: Show the current death count in the corner of the screen
-- **Infinite Silk**: Maintain Silk resource at maximum level at all times
-- **Fast Attack**: Remove attack cooldown between strikes, allowing continuous attacking
-- **Attack to Bounce**: Convert regular attacks to Bounce Pod into bounce attacks for better movement and combat efficiency
-- **Force Save Game**: Manual save button to instantly save the current game progress
+-   **Auto Collect**: Automatically collect currency items (Geo) when they land on the ground
+-   **Auto Parry**: Automatically parry incoming attacks without manual timing
+-   **Take No Damage**: Enable invincibility mode, preventing the player from taking damage from enemies
+-   **Draw HP Bar**: Display enemy health bars on screen to track their current health status
+-   **Draw Death Count**: Show the current death count in the corner of the screen
+-   **Infinite Silk**: Maintain Silk resource at maximum level at all times
+-   **Fast Attack**: Remove attack cooldown between strikes, allowing continuous attacking
+-   **Attack to Bounce**: Convert regular attacks to Bounce Pod into bounce attacks for better movement and combat efficiency
+-   **Force Save Game**: Manual save button to instantly save the current game progress
 
 ## Installation
 
@@ -27,9 +28,9 @@ All options are stored in the BepInEx configuration file and will persist betwee
 
 ## Requirements
 
-- Hollow Knight: Silksong
-- BepInEx framework
-- .NET Framework 4.6+
+-   Hollow Knight: Silksong
+-   BepInEx framework
+-   .NET Framework 4.6+
 
 ## Disclaimer
 
