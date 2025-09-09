@@ -61,13 +61,6 @@ namespace SilksongUtils
             GUI.Box(new Rect(startX, startY, WIDTH, HEIGHT), "Silksong Utilities");
             startY += 30;
 
-            var saveGame = GUI.Button(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), "Force Save Game");
-            if (saveGame)
-            {
-                GameManager.instance.SaveGame(null);
-            }
-            startY += 30;
-
             AutoCollect = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), AutoCollect, " Auto Collect");
             startY += 30;
 
@@ -81,6 +74,13 @@ namespace SilksongUtils
             startY += 30;
 
             InfiniteSilk = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), InfiniteSilk, " Infinite Silk");
+            startY += 30;
+
+            var saveGame = GUI.Button(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), "Force Save Game");
+            if (saveGame)
+            {
+                gameManager.SaveGame(null);
+            }
             startY += 30;
         }
     }
