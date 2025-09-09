@@ -10,11 +10,13 @@ namespace SilksongUtils.Patches
         [HarmonyPostfix]
         private static void Awake_Postfix(HealthManager __instance)
         {
+            var eventRegister = __instance.gameObject.GetComponent<EventRegister>();
+            if (eventRegister != null) return;
+
             var esp = __instance.gameObject.GetComponent<ESP>();
-            if (esp == null)
-            {
-                __instance.gameObject.AddComponent<ESP>();
-            }
+            if (esp != null) return;
+
+            __instance.gameObject.AddComponent<ESP>();
         }
 
         [HarmonyPatch(typeof(HealthManager), "SetDead")]
@@ -22,10 +24,9 @@ namespace SilksongUtils.Patches
         private static void SetDead_Postfix(HealthManager __instance)
         {
             var esp = __instance.gameObject.GetComponent<ESP>();
-            if (esp != null)
-            {
-                Object.Destroy(esp);
-            }
+            if (esp == null) return;
+
+            Object.Destroy(esp);
         }
     }
 }
