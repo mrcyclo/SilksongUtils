@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using HarmonyLib;
+﻿using HarmonyLib;
 using UnityEngine;
 
 namespace SilksongUtils.Patches
@@ -8,11 +7,11 @@ namespace SilksongUtils.Patches
     {
         [HarmonyReversePatch]
         [HarmonyPatch(typeof(HeroDownAttack), "OnHitResponded")]
-        public static void HeroDownAttack_OnHitResponded(object instance, DamageEnemies.HitResponse hitResponse) => throw new System.NotImplementedException();
+        private static void HeroDownAttack_OnHitResponded(object instance, DamageEnemies.HitResponse hitResponse) => throw new System.NotImplementedException();
 
         [HarmonyPatch(typeof(DamageEnemies), "Awake")]
         [HarmonyPostfix]
-        public static void DamageEnemies_Awake_Postfix(DamageEnemies __instance)
+        private static void DamageEnemies_Awake_Postfix(DamageEnemies __instance)
         {
             __instance.HitResponded += (response) =>
             {
@@ -28,32 +27,33 @@ namespace SilksongUtils.Patches
                 if (heroDownAttack == null) return;
 
                 HeroDownAttack_OnHitResponded(heroDownAttack, response);
-                Plugin.Logger.LogInfo("HeroDownAttack_OnHitResponded executed");
             };
         }
 
-        //[HarmonyPatch(typeof(DamageEnemies), "ProcessDamageBuffer")]
-        //[HarmonyPrefix]
-        //public static void DamageEnemies_ProcessDamageBuffer_Prefix(DamageEnemies __instance)
-        //{
-        //    if (!Plugin.configAttackToBounce.Value) return;
+        [HarmonyPatch(typeof(BouncePod), "Hit")]
+        [HarmonyPrefix]
+        private static void BouncePod_Hit_Prefix(BouncePod __instance, ref HitInstance damageInstance)
+        {
+            if (!Plugin.configAttackToBounce.Value) return;
+            if (damageInstance.AttackType != AttackTypes.Nail) return;
 
-        //    //Plugin.Logger.LogInfo("DamageEnemies_ProcessDamageBuffer_Prefix");
+            var hitDirection = damageInstance.GetHitDirection(HitInstance.TargetType.BouncePod);
+            if (hitDirection == HitInstance.HitDirection.Down) return;
 
-        //    var processingDamageBuffer = (List<DamageEnemies.HitResponse>)AccessTools.Field(__instance.GetType(), "processingDamageBuffer").GetValue(__instance);
-        //    foreach (var hitResponse in processingDamageBuffer)
-        //    {
-        //        var hit = hitResponse.Hit;
+            damageInstance.Direction = 300;
+        }
 
-        //        Plugin.Logger.LogInfo("Hit: " + hit.ToString());
+        [HarmonyPatch(typeof(BounceBalloon), "Hit")]
+        [HarmonyPrefix]
+        private static void BounceBalloon_Hit_Prefix(BounceBalloon __instance, ref HitInstance damageInstance)
+        {
+            if (!Plugin.configAttackToBounce.Value) return;
+            if (damageInstance.AttackType != AttackTypes.Nail) return;
 
-        //        var hitDirection = hit.GetHitDirection(HitInstance.TargetType.BouncePod);
-        //        if (hitDirection == HitInstance.HitDirection.Down) continue;
+            var hitDirection = damageInstance.GetHitDirection(HitInstance.TargetType.BouncePod);
+            if (hitDirection == HitInstance.HitDirection.Down) return;
 
-        //        Plugin.Logger.LogInfo("Modifying hit direction to Down");
-
-        //        hit.Direction = 300;
-        //    }
-        //}
+            damageInstance.Direction = 300;
+        }
     }
 }

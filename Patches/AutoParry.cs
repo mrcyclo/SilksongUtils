@@ -7,7 +7,7 @@ namespace SilksongUtils.Patches
     {
         [HarmonyReversePatch]
         [HarmonyPatch(typeof(HeroController), "DoAttack")]
-        public static void HeroController_DoAttack(object instance) => throw new NotImplementedException();
+        private static void HeroController_DoAttack(object instance) => throw new NotImplementedException();
 
         [HarmonyPatch(typeof(HeroController), "TakeDamage")]
         [HarmonyPrefix]
