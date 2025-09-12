@@ -10,8 +10,8 @@ namespace SilksongUtils.Patches
         [HarmonyPostfix]
         private static void Awake_Postfix(HealthManager __instance)
         {
-            var eventRegister = __instance.gameObject.GetComponent<EventRegister>();
-            if (eventRegister != null) return;
+            //var eventRegister = __instance.gameObject.GetComponent<EventRegister>();
+            //if (eventRegister != null) return;
 
             var esp = __instance.gameObject.GetComponent<ESP>();
             if (esp != null) return;
