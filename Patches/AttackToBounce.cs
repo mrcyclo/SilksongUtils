@@ -19,22 +19,16 @@ namespace SilksongUtils.Patches
                 if (!Plugin.configAttackToBounce.Value) return;
 
                 var hitDirection = response.Hit.GetHitDirection(HitInstance.TargetType.BouncePod);
-                if (hitDirection == HitInstance.HitDirection.Down) return;
+                if (hitDirection == HitInstance.HitDirection.Up) return;
 
                 var hc = HeroController.instance;
                 if (hc.cState.onGround) return;
 
-                //var heroDownAttack = Object.FindAnyObjectByType<HeroDownAttack>();
-                //if (heroDownAttack == null) return;
+                var heroDownAttack = Object.FindAnyObjectByType<HeroDownAttack>();
+                if (heroDownAttack == null) return;
 
-                //response.Hit.Direction = 300;
-
-                //Debug.Break();
-
-                //HeroDownAttack_OnHitResponded(heroDownAttack, response);
-                //Plugin.Logger.LogInfo("HeroDownAttack_OnHitResponded executed");
-
-                 hc.DownspikeBounce(false);
+                HeroDownAttack_OnHitResponded(heroDownAttack, response);
+                Plugin.Logger.LogInfo("HeroDownAttack_OnHitResponded executed");
             };
         }
 
