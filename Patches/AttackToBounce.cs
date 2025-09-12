@@ -5,10 +5,6 @@ namespace SilksongUtils.Patches
 {
     internal class AttackToBounce
     {
-        [HarmonyReversePatch]
-        [HarmonyPatch(typeof(HeroDownAttack), "OnHitResponded")]
-        private static void HeroDownAttack_OnHitResponded(object instance, DamageEnemies.HitResponse hitResponse) => throw new System.NotImplementedException();
-
         [HarmonyPatch(typeof(DamageEnemies), "Awake")]
         [HarmonyPostfix]
         private static void DamageEnemies_Awake_Postfix(DamageEnemies __instance)
@@ -26,7 +22,7 @@ namespace SilksongUtils.Patches
                 var heroDownAttack = Object.FindAnyObjectByType<HeroDownAttack>();
                 if (heroDownAttack == null) return;
 
-                HeroDownAttack_OnHitResponded(heroDownAttack, response);
+                ReversePatch.HeroDownAttack_OnHitResponded(heroDownAttack, response);
             };
         }
 

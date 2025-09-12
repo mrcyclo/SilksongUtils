@@ -1,23 +1,41 @@
-using System;
 using HarmonyLib;
+using UnityEngine;
 
 namespace SilksongUtils.Patches
 {
     internal class AutoParry
     {
-        [HarmonyReversePatch]
-        [HarmonyPatch(typeof(HeroController), "DoAttack")]
-        private static void HeroController_DoAttack(object instance) => throw new NotImplementedException();
+        private static GameObject parryBox = null;
 
-        [HarmonyPatch(typeof(HeroController), "TakeDamage")]
+        [HarmonyPatch(typeof(HeroBox), "Awake")]
         [HarmonyPrefix]
-        private static void HeroController_TakeDamage_Prefix(HeroController __instance)
+        private static void HeroBox_Awake_Prefix(HeroBox __instance)
         {
-            if (!Plugin.configAutoParry.Value) return;
-            if (!__instance.CanAttack()) return;
+            //DebugDrawColliderRuntime.IsShowing = true;
 
-            __instance.cState.parrying = true;
-            HeroController_DoAttack(__instance);
+            parryBox = new GameObject("Parry Box");
+            parryBox.layer = __instance.gameObject.layer;
+            parryBox.transform.SetParent(__instance.gameObject.transform);
+            parryBox.transform.localPosition = Vector3.zero;
+
+            var rb = parryBox.AddComponent<Rigidbody2D>();
+            rb.bodyType = RigidbodyType2D.Kinematic;
+
+            var col = parryBox.AddComponent<CircleCollider2D>();
+            col.isTrigger = true;
+
+            parryBox.AddComponent<Objects.AutoParry>();
+
+            Object.DontDestroyOnLoad(parryBox);
+        }
+
+        [HarmonyPatch(typeof(HeroBox), "OnDestroy")]
+        [HarmonyPrefix]
+        private static void HeroBox_OnDestroy_Prefix(HeroBox __instance)
+        {
+            //DebugDrawColliderRuntime.IsShowing = false;
+
+            Object.Destroy(parryBox);
         }
     }
 }
