@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System.Collections.Generic;
+using HarmonyLib;
 using UnityEngine;
 
 namespace SilksongUtils.Patches
@@ -11,7 +12,7 @@ namespace SilksongUtils.Patches
 
         [HarmonyPatch(typeof(DamageEnemies), "Awake")]
         [HarmonyPostfix]
-        public static void DamageEnemies_ProcessDamageBuffer_Postfix(DamageEnemies __instance)
+        public static void DamageEnemies_Awake_Postfix(DamageEnemies __instance)
         {
             __instance.HitResponded += (response) =>
             {
@@ -23,11 +24,42 @@ namespace SilksongUtils.Patches
                 var hc = HeroController.instance;
                 if (hc.cState.onGround) return;
 
-                var heroDownAttack = Object.FindAnyObjectByType<HeroDownAttack>();
-                if (heroDownAttack == null) return;
+                //var heroDownAttack = Object.FindAnyObjectByType<HeroDownAttack>();
+                //if (heroDownAttack == null) return;
 
-                HeroDownAttack_OnHitResponded(heroDownAttack, response);
+                //response.Hit.Direction = 300;
+
+                //Debug.Break();
+
+                //HeroDownAttack_OnHitResponded(heroDownAttack, response);
+                //Plugin.Logger.LogInfo("HeroDownAttack_OnHitResponded executed");
+
+                 hc.DownspikeBounce(false);
             };
         }
+
+        //[HarmonyPatch(typeof(DamageEnemies), "ProcessDamageBuffer")]
+        //[HarmonyPrefix]
+        //public static void DamageEnemies_ProcessDamageBuffer_Prefix(DamageEnemies __instance)
+        //{
+        //    if (!Plugin.configAttackToBounce.Value) return;
+
+        //    //Plugin.Logger.LogInfo("DamageEnemies_ProcessDamageBuffer_Prefix");
+
+        //    var processingDamageBuffer = (List<DamageEnemies.HitResponse>)AccessTools.Field(__instance.GetType(), "processingDamageBuffer").GetValue(__instance);
+        //    foreach (var hitResponse in processingDamageBuffer)
+        //    {
+        //        var hit = hitResponse.Hit;
+
+        //        Plugin.Logger.LogInfo("Hit: " + hit.ToString());
+
+        //        var hitDirection = hit.GetHitDirection(HitInstance.TargetType.BouncePod);
+        //        if (hitDirection == HitInstance.HitDirection.Down) continue;
+
+        //        Plugin.Logger.LogInfo("Modifying hit direction to Down");
+
+        //        hit.Direction = 300;
+        //    }
+        //}
     }
 }
