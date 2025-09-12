@@ -24,7 +24,7 @@ namespace SilksongUtils.Patches
             var col = parryBox.AddComponent<CircleCollider2D>();
             col.isTrigger = true;
 
-            parryBox.AddComponent<Objects.AutoParry>();
+            parryBox.AddComponent<Components.AutoParry>();
 
             Object.DontDestroyOnLoad(parryBox);
         }

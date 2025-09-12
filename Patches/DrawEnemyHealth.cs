@@ -1,5 +1,5 @@
 ﻿using HarmonyLib;
-using SilksongUtils.Objects;
+using SilksongUtils.Components;
 using UnityEngine;
 
 namespace SilksongUtils.Patches

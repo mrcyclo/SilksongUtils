@@ -1,7 +1,7 @@
 ﻿using SilksongUtils.Patches;
 using UnityEngine;
 
-namespace SilksongUtils.Objects
+namespace SilksongUtils.Components
 {
     internal class AutoParry : MonoBehaviour
     {
