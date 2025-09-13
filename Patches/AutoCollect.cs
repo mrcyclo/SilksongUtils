@@ -4,12 +4,12 @@ namespace SilksongUtils.Patches
 {
     internal class AutoCollect
     {
-        [HarmonyPatch(typeof(CurrencyObjectBase), "Land")]
+        [HarmonyPatch(typeof(CurrencyObjectBase), "MagnetToolIsEquipped")]
         [HarmonyPostfix]
-        private static void Postfix(CurrencyObjectBase __instance)
+        private static void Postfix(CurrencyObjectBase __instance, ref bool __result)
         {
             if (!Plugin.configAutoCollect.Value) return;
-            AccessTools.Field(typeof(CurrencyObjectBase), "isAttracted").SetValue(__instance, true);
+            __result = true;
         }
     }
 }
