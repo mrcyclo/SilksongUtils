@@ -20,6 +20,7 @@ namespace SilksongUtils
         internal static ConfigEntry<bool> configAttackToBounce;
         internal static ConfigEntry<bool> configChangeEquipAnywhere;
         internal static ConfigEntry<bool> configSkipIntro;
+        internal static ConfigEntry<bool> configAlwaysCompass;
 
         private Harmony harmony;
         private GameObject ui;
@@ -40,6 +41,7 @@ namespace SilksongUtils
             configFastAttack = Config.Bind("General", "FastAttack", false, "Fast Attack");
             configAttackToBounce = Config.Bind("General", "AttackToBounce", false, "Attack to Bounce");
             configChangeEquipAnywhere = Config.Bind("General", "ChangeEquipAnywhere", false, "Change Equip Anywhere");
+            configAlwaysCompass = Config.Bind("General", "AlwaysCompass", false, "Always Compass");
 
             // Register patches
             harmony = new Harmony(MyPluginInfo.PLUGIN_GUID);

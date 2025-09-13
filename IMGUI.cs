@@ -82,6 +82,9 @@ namespace SilksongUtils
             Plugin.configChangeEquipAnywhere.Value = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), Plugin.configChangeEquipAnywhere.Value, " Change Equip Anywhere");
             startY += 30;
 
+            Plugin.configAlwaysCompass.Value = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), Plugin.configAlwaysCompass.Value, " Always Compass");
+            startY += 30;
+
             var saveGame = GUI.Button(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), "Force Save Game");
             if (saveGame)
             {
