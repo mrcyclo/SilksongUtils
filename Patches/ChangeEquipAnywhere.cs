@@ -12,5 +12,13 @@ namespace SilksongUtils.Patches
             if (!Plugin.configChangeEquipAnywhere.Value) return;
             __result = true;
         }
+
+        [HarmonyPatch(typeof(InventoryPaneList), "OnClosingInventory")]
+        [HarmonyPostfix]
+        private static void InventoryPaneList_OnClosingInventory_Postfix(InventoryPaneList __instance)
+        {
+            if (!Plugin.configChangeEquipAnywhere.Value) return;
+            ToolItemManager.SendEquippedChangedEvent(false);
+        }
     }
 }
