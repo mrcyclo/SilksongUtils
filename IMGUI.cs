@@ -55,6 +55,9 @@ namespace SilksongUtils
             GUI.Box(new Rect(startX, startY, WIDTH, HEIGHT), "Silksong Utilities");
             startY += 30;
 
+            Plugin.configSkipIntro.Value = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), Plugin.configSkipIntro.Value, " Skip Intro");
+            startY += 30;
+
             Plugin.configAutoCollect.Value = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), Plugin.configAutoCollect.Value, " Auto Collect");
             startY += 30;
 

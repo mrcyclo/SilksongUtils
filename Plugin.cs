@@ -19,6 +19,7 @@ namespace SilksongUtils
         internal static ConfigEntry<bool> configFastAttack;
         internal static ConfigEntry<bool> configAttackToBounce;
         internal static ConfigEntry<bool> configChangeEquipAnywhere;
+        internal static ConfigEntry<bool> configSkipIntro;
 
         private Harmony harmony;
         private GameObject ui;
@@ -29,6 +30,7 @@ namespace SilksongUtils
             Logger = base.Logger;
 
             // Register config
+            configSkipIntro = Config.Bind("General", "SkipIntro", false, "Skip Intro");
             configAutoCollect = Config.Bind("General", "AutoCollect", false, "Auto collect");
             configTakeNoDamage = Config.Bind("General", "TakeNoDamage", false, "Take no damage");
             configDrawHpBar = Config.Bind("General", "DrawHpBar", false, "Draw HP bar");
