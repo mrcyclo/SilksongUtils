@@ -5,26 +5,26 @@ namespace SilksongUtils.Patches
 {
     internal class AttackToBounce
     {
-        [HarmonyPatch(typeof(DamageEnemies), "Awake")]
-        [HarmonyPostfix]
-        private static void DamageEnemies_Awake_Postfix(DamageEnemies __instance)
-        {
-            __instance.HitResponded += (response) =>
-            {
-                if (!Plugin.configAttackToBounce.Value) return;
+        //[HarmonyPatch(typeof(DamageEnemies), "Awake")]
+        //[HarmonyPostfix]
+        //private static void DamageEnemies_Awake_Postfix(DamageEnemies __instance)
+        //{
+        //    __instance.HitResponded += (response) =>
+        //    {
+        //        if (!Plugin.configAttackToBounce.Value) return;
 
-                var hitDirection = response.Hit.GetHitDirection(HitInstance.TargetType.BouncePod);
-                if (hitDirection == HitInstance.HitDirection.Up) return;
+        //        var hitDirection = response.Hit.GetHitDirection(HitInstance.TargetType.BouncePod);
+        //        if (hitDirection == HitInstance.HitDirection.Up) return;
 
-                var hc = HeroController.instance;
-                if (hc.cState.onGround) return;
+        //        var hc = HeroController.instance;
+        //        if (hc.cState.onGround) return;
 
-                var heroDownAttack = Object.FindAnyObjectByType<HeroDownAttack>();
-                if (heroDownAttack == null) return;
+        //        var heroDownAttack = Object.FindAnyObjectByType<HeroDownAttack>();
+        //        if (heroDownAttack == null) return;
 
-                ReversePatch.HeroDownAttack_OnHitResponded(heroDownAttack, response);
-            };
-        }
+        //        ReversePatch.HeroDownAttack_OnHitResponded(heroDownAttack, response);
+        //    };
+        //}
 
         [HarmonyPatch(typeof(BouncePod), "Hit")]
         [HarmonyPrefix]
