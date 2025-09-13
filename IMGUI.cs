@@ -85,6 +85,9 @@ namespace SilksongUtils
             Plugin.configAlwaysCompass.Value = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), Plugin.configAlwaysCompass.Value, " Always Compass");
             startY += 30;
 
+            Plugin.configInfiniteAttackTool.Value = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), Plugin.configInfiniteAttackTool.Value, " Infinite Attack Tool");
+            startY += 30;
+
             var saveGame = GUI.Button(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), "Force Save Game");
             if (saveGame)
             {
