@@ -8,6 +8,7 @@ namespace SilksongUtils.Patches
         [HarmonyPrefix]
         private static void ToolItemManager_GetToolStorageAmount_Prefix(ToolItemManager __instance, ToolItem tool)
         {
+            if (tool == null) return;
             if (!Plugin.configInfiniteAttackTool.Value) return;
             if (tool.Type != ToolItemType.Red) return;
 
