@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using UnityEngine;
 
 namespace SilksongUtils.Patches
 {
@@ -9,8 +10,15 @@ namespace SilksongUtils.Patches
         private static void Update_Prefix(HeroController __instance)
         {
             if (!Plugin.configInfiniteSilk.Value) return;
-            if (__instance.playerData.silk >= __instance.playerData.CurrentSilkMax) return;
-            __instance.playerData.silk = __instance.playerData.CurrentSilkMax;
+            __instance.playerData.silk = Mathf.Max(__instance.playerData.silk, __instance.playerData.silkMax);
+        }
+
+        [HarmonyPatch(typeof(PlayerData), "TakeSilk")]
+        [HarmonyPrefix]
+        private static bool PlayerData_TakeSilk_Prefix(PlayerData __instance)
+        {
+            if (!Plugin.configInfiniteSilk.Value) return true;
+            return false;
         }
     }
 }
