@@ -4,17 +4,25 @@ namespace SilksongUtils.Patches
 {
     internal class InfiniteAttackTool
     {
-        [HarmonyPatch(typeof(ToolItemManager), "GetToolStorageAmount")]
-        [HarmonyPrefix]
-        private static void ToolItemManager_GetToolStorageAmount_Prefix(ToolItemManager __instance, ToolItem tool)
-        {
-            if (tool == null) return;
-            if (!Plugin.configInfiniteAttackTool.Value) return;
-            if (tool.Type != ToolItemType.Red) return;
+        //[HarmonyPatch(typeof(ToolItemManager), "GetToolStorageAmount")]
+        //[HarmonyPrefix]
+        //private static void ToolItemManager_GetToolStorageAmount_Prefix(ToolItemManager __instance, ToolItem tool)
+        //{
+        //    if (tool == null) return;
+        //    if (!Plugin.configInfiniteAttackTool.Value) return;
+        //    if (tool.Type != ToolItemType.Red) return;
 
-            var savedData = tool.SavedData;
-            savedData.AmountLeft = tool.BaseStorageAmount;
-            tool.SavedData = savedData;
+        //    var savedData = tool.SavedData;
+        //    savedData.AmountLeft = tool.BaseStorageAmount;
+        //    tool.SavedData = savedData;
+        //}
+
+        [HarmonyPatch(typeof(HeroController), "DidUseAttackTool")]
+        [HarmonyPrefix]
+        private static bool HeroController_DidUseAttackTool_Prefix()
+        {
+            if (!Plugin.configInfiniteAttackTool.Value) return true;
+            return false;
         }
     }
 }
