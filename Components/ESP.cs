@@ -16,6 +16,8 @@ namespace SilksongUtils.Components
 
         private void OnGUI()
         {
+            if (!Plugin.configDrawHpBar.Value) return;
+
             if (gameManager == null) gameManager = Object.FindAnyObjectByType<GameManager>();
             if (gameManager == null) return;
 
@@ -24,9 +26,11 @@ namespace SilksongUtils.Components
 
             if (gameObject == null) return;
             if (gameObject.transform == null) return;
+
             if (Camera.main == null) return;
+
             if (healthManager.isDead) return;
-            if (!Plugin.configDrawHpBar.Value) return;
+            if (healthManager.hp <= 0) return;
 
             if (textFieldNoBorder == null)
             {
