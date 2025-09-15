@@ -33,5 +33,14 @@ namespace SilksongUtils.Patches
 
             AccessTools.Field(__instance.GetType(), "attack_cooldown").SetValue(__instance, 0f);
         }
+
+        [HarmonyPatch(typeof(HeroController), "ThrowToolCooldownReady")]
+        [HarmonyPrefix]
+        private static void HeroController_ThrowToolCooldownReady_Prefix(HeroController __instance)
+        {
+            if (!Plugin.configFastAttack.Value) return;
+
+            AccessTools.Field(__instance.GetType(), "throwToolCooldown").SetValue(__instance, 0f);
+        }
     }
 }
