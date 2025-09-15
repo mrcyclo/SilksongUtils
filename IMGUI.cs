@@ -88,6 +88,9 @@ namespace SilksongUtils
             Plugin.configInfiniteAttackTool.Value = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), Plugin.configInfiniteAttackTool.Value, " Infinite Attack Tool");
             startY += 30;
 
+            Plugin.configCoralCrustTreeNoBreak.Value = GUI.Toggle(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), Plugin.configCoralCrustTreeNoBreak.Value, " Coral Crust Tree No Break");
+            startY += 30;
+
             var saveGame = GUI.Button(new Rect(startX + PADDING, startY, WIDTH - PADDING * 2, 20), "Force Save Game");
             if (saveGame)
             {

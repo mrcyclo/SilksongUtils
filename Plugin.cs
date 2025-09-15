@@ -22,6 +22,7 @@ namespace SilksongUtils
         internal static ConfigEntry<bool> configSkipIntro;
         internal static ConfigEntry<bool> configAlwaysCompass;
         internal static ConfigEntry<bool> configInfiniteAttackTool;
+        internal static ConfigEntry<bool> configCoralCrustTreeNoBreak;
 
         private Harmony harmony;
         private GameObject ui;
@@ -44,6 +45,7 @@ namespace SilksongUtils
             configChangeEquipAnywhere = Config.Bind("General", "ChangeEquipAnywhere", false, "Change Equip Anywhere");
             configAlwaysCompass = Config.Bind("General", "AlwaysCompass", false, "Always Compass");
             configInfiniteAttackTool = Config.Bind("General", "InfiniteAttackTool", false, "Infinite Attack Tool");
+            configCoralCrustTreeNoBreak = Config.Bind("General", "CoralCrustTreeNoBreak", false, "Coral Crust Tree No Break");
 
             // Register patches
             harmony = new Harmony(MyPluginInfo.PLUGIN_GUID);
